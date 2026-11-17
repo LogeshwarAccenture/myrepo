@@ -30,20 +30,25 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 
 Record your plan here before editing code.
 
-- Presentation tier decision:
-- Logic tier decision:
-- Data tier decision:
-- Activity tracking approach:
-- Team management approach:
-- Leaderboard approach:
-- Workout suggestions approach:
+- Presentation tier decision:Use the shared API client in the React frontend to call backend API endpoints and display activities, teams, leaderboard data, and workout suggestions.
+
+- Logic tier decision:Implement Express routes according to the API contract and return deliberate 4xx errors for invalid requests.
+
+- Data tier decision:Use Mongoose models to store and validate users, teams, and activities in MongoDB.
+
+- Activity tracking approach:Validate userId and teamId, create activity records, calculate points, and store occurredAt timestamps.
+
+- Team management approach:Allow team creation and listing, preserve name and mascot values, and return 400 when the team name is missing.
+- Leaderboard approach:Aggregate activity points by team, sort descending by total points, and assign ranks starting at 1.
+- Workout suggestions approach:Find users by email, generate recommendations from goals or recent activity, and return a 4xx response when no matching user exists.
 
 ## Test plan
 
 Record the commands you run and what each failure means.
 
-- Data-tier command: `npm run test:data --prefix octofit-tracker/backend`
-- API command: `npm run test:api --prefix octofit-tracker/backend`
-- Frontend command: `npm test --prefix octofit-tracker/frontend`
-- Backend build command: `npm run build --prefix octofit-tracker/backend`
-- Frontend build command: `npm run build --prefix octofit-tracker/frontend`
+- Data-tier command: `npm run test:data --prefix octofit-tracker/backend` Validates Mongoose models, relationships, and database behavior.
+- API command: `npm run test:api --prefix octofit-tracker/backend` Validates API routes, request validation, error handling, and response contracts.
+- Frontend command: `npm test --prefix octofit-tracker/frontend` Validates React components and frontend interaction with the API. 
+- Backend build command: `npm run build --prefix octofit-tracker/backend` Ensures the TypeScript backend compiles successfully.
+- Frontend build command: `npm run build --prefix octofit-tracker/frontend` Ensures the Vite React application builds successfully.
+Initial baseline: 15 tests failing before implementation, indicating incomplete functionality in the starter code.
